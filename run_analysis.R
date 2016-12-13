@@ -113,4 +113,16 @@ setkey(dt, Subject, ActivityNumber, activityName)
 
 dt <- data.table(melt(dt, key(dt), variable.name = "featureCode"))
 
+#Merge activity name.
+
+dt <- merge(dt, dtFeatures[, list(featureNum, featureCode, featureName)], by = "featureCode", 
+    all.x = TRUE)
+
+#Create a new variable,  activity  that is equivalent to  activityName  as a factor class. #Create a new variable,  feature  that is equivalent to  featureName  as a factor class.
+
+dt$activity <- factor(dt$activityName)
+dt$feature <- factor(dt$featureName)
+
+
+
 
